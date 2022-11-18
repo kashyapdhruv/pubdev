@@ -1,6 +1,7 @@
 import 'package:clipboard/clipboard.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:pubdev/generated/assets.dart';
 import 'package:pubdev/network/net_request.dart';
 
 class DetailPage extends ConsumerWidget {
@@ -38,7 +39,7 @@ class DetailPage extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/team-builder-sas.png"),
+          image: AssetImage(Assets.assetsSearchBackground),
           fit: BoxFit.cover,
         ),
       ),
@@ -46,7 +47,7 @@ class DetailPage extends ConsumerWidget {
         backgroundColor: Colors.transparent,
         appBar: buildAppbar(),
         body: Padding(
-          padding:  EdgeInsets.only(top: 30),
+          padding:  EdgeInsets.only(top: 50),
           child: Container(
             decoration: BoxDecoration(
               color: Colors.white,
@@ -186,6 +187,22 @@ class DetailPage extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 50,),
+                          // Text(
+                          //   "Author",
+                          //   style: TextStyle(
+                          //       fontSize: 20,
+                          //       fontWeight: FontWeight.w500
+                          //   ),
+                          // ),
+                          // SizedBox(height: 10,),
+                          // Text(
+                          //   "${detail.latest?.pubspec?.author}",
+                          //   style: TextStyle(
+                          //       color: Color(0xFF494950),
+                          //       fontSize: 18
+                          //   ),
+                          // ),
+                          // SizedBox(height: 25,),
                           Text(
                             "HomePage",
                             style: TextStyle(

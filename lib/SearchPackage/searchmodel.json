@@ -1,0 +1,35 @@
+{
+  "packages": [
+    {
+      "package": "url_launcher"
+    },
+    {
+      "package": "http"
+    },
+    {
+      "package": "provider"
+    },
+    {
+      "package": "image_picker"
+    },
+    {
+      "package": "get"
+    },
+    {
+      "package": "cached_network_image"
+    },
+    {
+      "package": "flutter_bloc"
+    },
+    {
+      "package": "path_provider"
+    },
+    {
+      "package": "flutter_local_notifications"
+    },
+    {
+      "package": "permission_handler"
+    }
+  ],
+  "next": "https://pub.dartlang.org/api/search?page=2"
+}

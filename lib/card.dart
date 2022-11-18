@@ -19,10 +19,10 @@ class ProductCard extends ConsumerWidget {
         elevation: 20,
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.only(
-            topRight: Radius.circular(10),
-            topLeft: Radius.circular(10),
-            bottomRight: Radius.circular(10),
-            bottomLeft: Radius.circular(10),
+            topRight: Radius.circular(15),
+            topLeft: Radius.circular(15),
+            bottomRight: Radius.circular(15),
+            bottomLeft: Radius.circular(15),
           ),
         ),
         child: InkWell(
@@ -56,7 +56,7 @@ class ProductCard extends ConsumerWidget {
                     Text(
                       'v',
                     ),
-                    SizedBox(width: 3,),
+                    SizedBox(width: 4,),
                     Text(
                       '${package.latest?.pubspec?.version}',
                       style: TextStyle(
@@ -64,7 +64,6 @@ class ProductCard extends ConsumerWidget {
                         fontWeight: FontWeight.w500,
                       ),
                     ),
-                    SizedBox(width: 50,),
                   ],
                 )
               ],
@@ -73,7 +72,5 @@ class ProductCard extends ConsumerWidget {
         ),
       ),
     );
-
-
   }
 }

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:pubdev/card.dart';
+import 'package:pubdev/generated/assets.dart';
 
 import 'network/net_request.dart';
 
@@ -37,7 +38,7 @@ class HomePage extends ConsumerWidget {
     return Container(
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: AssetImage("assets/team-builder-sas.png"),
+          image: AssetImage(Assets.assetsSearchBackground),
           fit: BoxFit.cover,
         ),
       ),
