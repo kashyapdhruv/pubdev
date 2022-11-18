@@ -140,7 +140,7 @@ class DetailPage extends ConsumerWidget {
                               ),
                               SizedBox(width: 7,),
                               Text(
-                                "${detail.latest?.published}",
+                                "${detail.latest?.published?.characters.skipLast(17)}",
                                 style: TextStyle(
                                     color: Color(0xFF494950),
                                     fontSize: 18
@@ -186,22 +186,6 @@ class DetailPage extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 50,),
-                          Text(
-                            "Author",
-                            style: TextStyle(
-                                fontSize: 20,
-                                fontWeight: FontWeight.w500
-                            ),
-                          ),
-                          SizedBox(height: 10,),
-                          Text(
-                            "${detail.latest?.pubspec?.author}",
-                            style: TextStyle(
-                                color: Color(0xFF494950),
-                                fontSize: 18
-                            ),
-                          ),
-                          SizedBox(height: 25,),
                           Text(
                             "HomePage",
                             style: TextStyle(
