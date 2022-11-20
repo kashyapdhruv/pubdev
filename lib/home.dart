@@ -1,10 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:pubdev/card.dart';
+import 'package:go_router/go_router.dart';
 import 'package:pubdev/generated/assets.dart';
+import 'package:pubdev/home_data.dart';
+import 'package:pubdev/search_provider.dart';
 
-import 'network/net_request.dart';
+import 'SearchPackage/Search.dart';
 
 class HomePage extends ConsumerWidget {
 
@@ -33,7 +35,7 @@ class HomePage extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final data = ref.watch(allPackageProvider);
+    final SearchProvider = ref.watch(searchStateProvider.notifier);
 
     return Container(
       decoration: BoxDecoration(
@@ -49,27 +51,31 @@ class HomePage extends ConsumerWidget {
           padding: EdgeInsets.only(top: 15),
           child: Column(
             children: [
-              Container(
-                padding: EdgeInsets.symmetric(horizontal: 20),
-                child: TextFormField(
-                  decoration: InputDecoration(
-                      hintText: "Search Packages",
-                      fillColor: Colors.white30,
-                      filled: true,
-                      prefixIcon: Icon(
-                        CupertinoIcons.search,
+              TextFormField(
+                onChanged: (value) {
+                  SearchProvider.search(page: 0, query: value);
+                },
+                decoration: InputDecoration(
+                    hintText: "Search Packages",
+                    fillColor: Colors.white30,
+                    filled: true,
+                    suffixIcon: IconButton(
+                      icon: Icon(CupertinoIcons.search),
+                      color: Colors.white,
+                      onPressed: () {
+                        GoRouter.of(context).replace('/Search');
+                        ref.refresh(searchStateProvider.notifier).stream;
+                      },
+                    ),
+                    hintStyle: TextStyle(
                         color: Colors.white,
-                      ),
-                      hintStyle: TextStyle(
-                          color: Colors.white,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 18),
-                      border: OutlineInputBorder(
-                          borderSide: BorderSide(color: Colors.white),
-                          borderRadius: BorderRadius.circular(25)),
-                      focusedBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(25))),
-                ),
+                        fontWeight: FontWeight.w500,
+                        fontSize: 18),
+                    border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.white),
+                        borderRadius: BorderRadius.circular(25)),
+                    focusedBorder: OutlineInputBorder(
+                        borderRadius: BorderRadius.circular(25))),
               ),
               SizedBox(
                 height: 10,
@@ -97,19 +103,33 @@ class HomePage extends ConsumerWidget {
                 height: 20,
               ),
               Expanded(
-                child: data.when(
-                    data: (data) {
-                      return Scaffold(
-                        backgroundColor: Color(0xFFf5f5f7),
-                        body: ListView(
-                            children: [
-                        ...data.packages?.map((e) => ProductCard(package: e,)).toList()?? []
-                      ]
-                      ),
+                child: StreamBuilder<Search?> (
+                    stream:  SearchProvider.stream,
+                    builder: (context, searchdata) {
+                      if (searchdata.connectionState == ConnectionState.waiting) {
+                        return HomeData();
+                      }
+                      if (!searchdata.hasData) {
+                        return Center(
+                          child: Text('No Such Package', style: TextStyle(fontSize: 40),),
+                        );
+                      }
+                      return ListView(
+                        children: searchdata.data!.packages!
+                            .map(
+                              (e) => ListTile(
+                            contentPadding: EdgeInsets.only(left: 24.0),
+                            title: Text(
+                              e.package!.toString(),
+                            ),
+                            onTap: () {
+                              context.push('/Detail?packageid=${e.package}');
+                            },
+                          ),
+                        )
+                            .toList(),
                       );
-                    },
-                    error: (err, s) => Text(err.toString()),
-                    loading: () => Center(child: CircularProgressIndicator(),)
+                    }
                 ),
               ),
             ],
@@ -119,3 +139,4 @@ class HomePage extends ConsumerWidget {
     );
   }
 }
+

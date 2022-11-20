@@ -1,35 +1,41 @@
+import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:http/http.dart' as http;
 import 'package:pubdev/SearchPackage/Search.dart';
 
-class SearchProvider extends StateNotifier<Search?> {
-  SearchProvider() : super(null);
+class SearchState extends StateNotifier<Search?> {
+  SearchState() : super(null);
 
-  Search? get searchresult => state;
-
-  Future<void> search({
-  required int page,
-  required String query,
-}) async {
+  static const _scheme = 'https';
+  static const _host = 'pub.dartlang.org';
+  Search? get searchResults => state;
+  Future<Search?> search({
+    required int page,
+    required String query,
+  }) async {
     if (query.isEmpty) {
       state = null;
-      return;
     }
 
-    final response = await http.get(
-      Uri.parse('https://pub.dartlang.org/api'),
-      '/search',
-      headers: {
-        'page' : '$page',
-        'q' : query
-      }
+    final dio = Dio();
+    final uri = Uri(
+      scheme: _scheme,
+      host: _host,
+      path: 'api/Search',
+      queryParameters: <String, String>{'page': '$page', 'q': query},
+    );
+
+    final response = await dio.getUri(
+      uri,
     );
 
     state = Search.fromJson(response.data);
+    return state;
+
+    // Returns {packages: [{ package: string }]}
   }
 }
 
-final SearchStateProvider = StateNotifierProvider<SearchProvider, Search? >((ref) {
-  return SearchProvider();
+final searchStateProvider =
+StateNotifierProvider<SearchState, Search?>((ref) {
+  return SearchState();
 });
-

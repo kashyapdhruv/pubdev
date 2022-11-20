@@ -113,7 +113,7 @@ class DetailPage extends ConsumerWidget {
                           Row(
                             children: [
                               Text(
-                                " v",
+                                "v",
                                 style: TextStyle(
                                     color: Color(0xFF3f7fc6),
                                     fontSize: 18
@@ -141,7 +141,7 @@ class DetailPage extends ConsumerWidget {
                               ),
                               SizedBox(width: 7,),
                               Text(
-                                "${detail.latest?.published?.characters.skipLast(17)}",
+                                 "${detail.latest?.published?.characters.skipLast(17)}",
                                 style: TextStyle(
                                     color: Color(0xFF494950),
                                     fontSize: 18
@@ -179,30 +179,36 @@ class DetailPage extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 15,),
-                          Text(
+                          SelectableText(
                             "${detail.latest?.pubspec?.description}",
+                            toolbarOptions: ToolbarOptions(
+                              copy: true,
+                              cut: true,
+                              paste: true,
+                              selectAll: true,
+                            ),
                             style: TextStyle(
                                 color: Color(0xFF494950),
                                 fontSize: 18
                             ),
                           ),
                           SizedBox(height: 50,),
-                          // Text(
-                          //   "Author",
-                          //   style: TextStyle(
-                          //       fontSize: 20,
-                          //       fontWeight: FontWeight.w500
-                          //   ),
-                          // ),
-                          // SizedBox(height: 10,),
-                          // Text(
-                          //   "${detail.latest?.pubspec?.author}",
-                          //   style: TextStyle(
-                          //       color: Color(0xFF494950),
-                          //       fontSize: 18
-                          //   ),
-                          // ),
-                          // SizedBox(height: 25,),
+                          Text(
+                            "Author",
+                            style: TextStyle(
+                                fontSize: 20,
+                                fontWeight: FontWeight.w500
+                            ),
+                          ),
+                          SizedBox(height: 10,),
+                          Text(
+                            "${detail.latest?.pubspec?.author}",
+                            style: TextStyle(
+                                color: Color(0xFF494950),
+                                fontSize: 18
+                            ),
+                          ),
+                          SizedBox(height: 25,),
                           Text(
                             "HomePage",
                             style: TextStyle(
@@ -211,8 +217,14 @@ class DetailPage extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 10,),
-                          Text(
+                          SelectableText(
                             "${detail.latest?.pubspec?.homepage}",
+                            toolbarOptions: ToolbarOptions(
+                              copy: true,
+                              cut: true,
+                              paste: true,
+                              selectAll: true,
+                            ),
                             style: TextStyle(
                                 color: Color(0xFF494950),
                                 fontSize: 18
@@ -227,8 +239,14 @@ class DetailPage extends ConsumerWidget {
                             ),
                           ),
                           SizedBox(height: 10,),
-                          Text(
+                          SelectableText(
                             "${detail.latest?.archiveUrl}",
+                            toolbarOptions: ToolbarOptions(
+                              copy: true,
+                              cut: true,
+                              paste: true,
+                              selectAll: true,
+                            ),
                             style: TextStyle(
                                 color: Color(0xFF494950),
                                 fontSize: 18

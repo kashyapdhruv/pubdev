@@ -14,6 +14,10 @@ class Approutes {
             path: '/Detail',
             builder: (BuildContext context, GoRouterState state) => DetailPage(package: state.queryParams['packageid']!,)
         ),
+        GoRoute(
+            path: '/Search',
+            builder: (context, state) =>
+                HomePage())
       ]
   );
 }
